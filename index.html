@@ -1,223 +1,218 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+    <title>Repositor de Mercadorias</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-<title>Cadastro | Repositor de Mercadorias</title>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #f4f4f4;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-<style>
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 42px 32px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+        h1 {
+            margin: 0 0 14px;
+            font-size: 34px;
+            font-weight: 700;
+            color: #111;
+        }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f3f0;
-    color: #1f1f1f;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 25px 15px;
-}
+        .subtitle {
+            margin: 0 auto 30px;
+            max-width: 760px;
+            font-size: 18px;
+            line-height: 1.5;
+            color: #555;
+        }
 
-.container {
-    width: 100%;
-    max-width: 1000px;
-    background: #ffffff;
-    border-radius: 24px;
-    padding: 40px 30px;
-    box-shadow: 0 15px 45px rgba(0,0,0,0.08);
-}
+        .video-area {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.header {
-    text-align: center;
-    margin-bottom: 30px;
-}
+        .video-box {
+            position: relative;
+            width: min(100%, 576px);
+            aspect-ratio: 576 / 1024;
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.header h1 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: #1f1f1f;
-}
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: #000;
+        }
 
-.header p {
-    font-size: 16px;
-    color: #666666;
-    line-height: 1.6;
-}
+        .start-screen {
+            position: absolute;
+            inset: 0;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            z-index: 5;
+        }
 
-.video-area {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px auto 25px;
-}
+        .start-text {
+            color: #fff;
+            font-size: 17px;
+            padding: 0 25px;
+            line-height: 1.5;
+        }
 
-.video-box {
-    position: relative;
-    width: min(100%, 430px);
-    aspect-ratio: 9 / 16;
-    background: #000000;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
-}
+        .start-button {
+            border: none;
+            padding: 15px 34px;
+            border-radius: 50px;
+            background: #ffffff;
+            color: #111;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
 
-video {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: contain;
-    background: #000000;
-}
+        .start-button:hover {
+            transform: scale(1.04);
+        }
 
-.play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+        .finished {
+            width: 100%;
+            min-height: 500px;
+            background: linear-gradient(145deg, #111, #292929);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 25px;
+            color: #fff;
+        }
 
-    width: 78px;
-    height: 78px;
+        .finished-title {
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
 
-    border: none;
-    border-radius: 50%;
+        .finished-text {
+            font-size: 17px;
+            line-height: 1.5;
+            margin-bottom: 28px;
+            color: #ddd;
+        }
 
-    background: rgba(255,255,255,0.96);
-    color: #1f1f1f;
+        #cadastroBtn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 48px;
+            border-radius: 50px;
+            background: #ffffff;
+            color: #111111;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            transition: all 0.25s ease;
+        }
 
-    font-size: 30px;
-    cursor: pointer;
+        #cadastroBtn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        .instruction {
+            margin-top: 25px;
+            font-size: 16px;
+            color: #666;
+        }
 
-    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+        .footer {
+            margin-top: 35px;
+            font-size: 14px;
+            color: #999;
+        }
 
-    transition: all 0.3s ease;
-}
+        @media (max-width: 600px) {
 
-.play-button:hover {
-    transform: translate(-50%, -50%) scale(1.08);
-}
+            body {
+                padding: 10px;
+            }
 
-.play-button.hidden {
-    display: none;
-}
+            .container {
+                padding: 28px 15px;
+                border-radius: 18px;
+            }
 
-.notice {
-    text-align: center;
-    font-size: 15px;
-    color: #777777;
-    line-height: 1.5;
-    margin-top: 5px;
-}
+            h1 {
+                font-size: 27px;
+            }
 
-.footer {
-    text-align: center;
-    margin-top: 30px;
-    color: #999999;
-    font-size: 12px;
-}
+            .subtitle {
+                font-size: 16px;
+            }
 
-@keyframes aparecer {
+            .video-box {
+                border-radius: 16px;
+            }
 
-    0% {
-        opacity: 0;
-        transform: scale(0.92);
-    }
+            .finished {
+                min-height: 500px;
+                border-radius: 16px;
+            }
 
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-}
-
-.cadastro-final {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    text-decoration: none;
-
-    background: #1f1f1f;
-    color: #ffffff;
-
-    font-size: 28px;
-    font-weight: 700;
-
-    border-radius: 18px;
-
-    animation: aparecer 0.8s ease forwards;
-
-    transition: all 0.3s ease;
-}
-
-.cadastro-final:hover {
-    background: #333333;
-    transform: scale(1.02);
-}
-
-@media (max-width: 600px) {
-
-    body {
-        padding: 15px 10px;
-    }
-
-    .container {
-        padding: 28px 18px;
-        border-radius: 18px;
-    }
-
-    .header h1 {
-        font-size: 25px;
-    }
-
-    .header p {
-        font-size: 14px;
-    }
-
-    .video-box {
-        width: min(100%, 380px);
-        border-radius: 15px;
-    }
-
-}
-
-</style>
-
+            .finished-title {
+                font-size: 25px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <div class="container">
 
-    <div class="header">
+    <h1>Repositor de Mercadorias</h1>
 
-        <h1>Repositor de Mercadorias</h1>
-
-        <p>
-            Assista ao vídeo completo antes de realizar seu cadastro.
-            Ao final, o botão de cadastro será liberado.
-        </p>
-
-    </div>
-
+    <p class="subtitle">
+        Assista ao vídeo completo antes de realizar seu cadastro.
+        Ao final, o botão de cadastro será liberado.
+    </p>
 
     <div class="video-area">
 
@@ -227,46 +222,43 @@ video {
                 id="video"
                 playsinline
                 preload="auto"
-                disablePictureInPicture
+                controlslist="nodownload nofullscreen noremoteplayback"
+                disablepictureinpicture
                 oncontextmenu="return false;"
             >
-
                 <source
                     src="https://res.cloudinary.com/uqats0ee/video/upload/v1791983597/video-repositor.mp4.mp4"
                     type="video/mp4"
                 >
-
                 Seu navegador não suporta a reprodução deste vídeo.
-
             </video>
 
+            <div class="start-screen" id="startScreen">
 
-            <button
-                id="playButton"
-                class="play-button"
-                type="button"
-                aria-label="Iniciar vídeo"
-            >
-                ▶
-            </button>
+                <div class="start-text">
+                    Assista ao vídeo completo para continuar.
+                </div>
+
+                <button
+                    class="start-button"
+                    id="startButton"
+                    type="button"
+                >
+                    ▶ Iniciar vídeo
+                </button>
+
+            </div>
 
         </div>
 
     </div>
 
-
-    <div
-        class="notice"
-        id="notice"
-    >
-        Clique no botão para iniciar o vídeo.
-    </div>
-
+    <p class="instruction" id="instruction">
+        O botão de cadastro será liberado somente após o término do vídeo.
+    </p>
 
     <div class="footer">
-
         GM Promo • Recrutamento e Seleção
-
     </div>
 
 </div>
@@ -274,146 +266,189 @@ video {
 
 <script>
 
-const video = document.getElementById("video");
+    const video = document.getElementById("video");
+    const videoBox = document.getElementById("videoBox");
+    const startScreen = document.getElementById("startScreen");
+    const startButton = document.getElementById("startButton");
+    const instruction = document.getElementById("instruction");
 
-const videoBox = document.getElementById("videoBox");
-
-const playButton = document.getElementById("playButton");
-
-const notice = document.getElementById("notice");
-
-let ultimaPosicao = 0;
-
-let iniciou = false;
+    let videoStarted = false;
+    let lastTime = 0;
 
 
-/* INICIAR O VÍDEO */
+    /*
+     * INICIA O VÍDEO
+     */
 
-playButton.addEventListener("click", function () {
+    startButton.addEventListener("click", function () {
 
-    iniciou = true;
+        videoStarted = true;
 
-    video.play();
+        startScreen.style.display = "none";
 
-    playButton.classList.add("hidden");
+        video.currentTime = 0;
 
-    notice.textContent =
-        "Assista ao vídeo até o final para liberar o cadastro.";
+        video.play().catch(function () {
+            startScreen.style.display = "flex";
+        });
 
-});
-
-
-/* IMPEDIR AVANÇO */
-
-video.addEventListener("timeupdate", function () {
-
-    if (video.currentTime > ultimaPosicao + 0.5) {
-
-        video.currentTime = ultimaPosicao;
-
-    } else {
-
-        ultimaPosicao = video.currentTime;
-
-    }
-
-});
+    });
 
 
-/* IMPEDIR TENTATIVA DE AVANÇAR/RETROCEDER */
+    /*
+     * IMPEDE QUE A PESSOA USE O TECLADO
+     * PARA TENTAR AVANÇAR OU VOLTAR.
+     */
 
-video.addEventListener("seeking", function () {
+    document.addEventListener("keydown", function (event) {
 
-    if (video.currentTime > ultimaPosicao + 0.5) {
+        if (!videoStarted) {
+            return;
+        }
 
-        video.currentTime = ultimaPosicao;
+        const teclasBloqueadas = [
+            "ArrowLeft",
+            "ArrowRight",
+            "ArrowUp",
+            "ArrowDown",
+            " ",
+            "Home",
+            "End"
+        ];
 
-    }
+        if (teclasBloqueadas.includes(event.key)) {
+            event.preventDefault();
+        }
 
-});
-
-
-/* IMPEDIR ALTERAÇÃO DE VELOCIDADE */
-
-video.addEventListener("ratechange", function () {
-
-    if (video.playbackRate !== 1) {
-
-        video.playbackRate = 1;
-
-    }
-
-});
-
-
-/* IMPEDIR PAUSA DEPOIS QUE COMEÇOU */
-
-video.addEventListener("pause", function () {
-
-    if (iniciou && !video.ended) {
-
-        video.play();
-
-    }
-
-});
+    });
 
 
-/* QUANDO O VÍDEO TERMINAR */
+    /*
+     * IMPEDE ALTERAÇÃO MANUAL DO TEMPO.
+     */
 
-video.addEventListener("ended", function () {
+    video.addEventListener("timeupdate", function () {
 
-    videoBox.innerHTML = `
-    
-        <a
-            class="cadastro-final"
-            href="https://forms.gle/A1ZPQe8f62gcNPhQ7"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            Cadastre-se
-        </a>
+        if (!videoStarted) {
+            return;
+        }
 
-    `;
+        /*
+         * Se tentar voltar, retorna para onde estava.
+         */
 
-    notice.textContent =
-        "Vídeo concluído! Seu cadastro está liberado.";
+        if (video.currentTime < lastTime - 0.5) {
 
-});
+            video.currentTime = lastTime;
 
+        } else {
 
-/* BLOQUEAR BOTÃO DIREITO */
+            lastTime = video.currentTime;
 
-video.addEventListener("contextmenu", function (event) {
+        }
 
-    event.preventDefault();
-
-});
+    });
 
 
-/* BLOQUEAR TECLAS DE AVANÇO/RETROCESSO */
+    /*
+     * SE TENTAR MOVER O TEMPO DO VÍDEO,
+     * VOLTA PARA A POSIÇÃO ANTERIOR.
+     */
 
-document.addEventListener("keydown", function (event) {
+    video.addEventListener("seeking", function () {
 
-    const teclasBloqueadas = [
-        "ArrowLeft",
-        "ArrowRight",
-        "Home",
-        "End",
-        " ",
-        "MediaPlayPause"
-    ];
+        if (!videoStarted) {
+            return;
+        }
 
-    if (teclasBloqueadas.includes(event.key)) {
+        if (video.currentTime > lastTime + 0.5) {
+
+            video.currentTime = lastTime;
+
+        }
+
+        if (video.currentTime < lastTime - 0.5) {
+
+            video.currentTime = lastTime;
+
+        }
+
+    });
+
+
+    /*
+     * NÃO PERMITE PAUSAR O VÍDEO DEPOIS QUE ELE COMEÇOU.
+     */
+
+    video.addEventListener("pause", function () {
+
+        if (
+            videoStarted &&
+            !video.ended
+        ) {
+
+            video.play().catch(function () {});
+
+        }
+
+    });
+
+
+    /*
+     * QUANDO O VÍDEO TERMINAR:
+     *
+     * O VÍDEO É REMOVIDO
+     * E O BOTÃO DE CADASTRO APARECE
+     * NO MESMO LUGAR.
+     */
+
+    video.addEventListener("ended", function () {
+
+        videoStarted = false;
+
+        videoBox.innerHTML = `
+
+            <div class="finished">
+
+                <div class="finished-title">
+                    Vídeo concluído!
+                </div>
+
+                <div class="finished-text">
+                    Agora você pode realizar seu cadastro.
+                </div>
+
+                <a
+                    id="cadastroBtn"
+                    href="https://forms.gle/A1ZPQe8f62gcNPhQ7"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Cadastre-se
+                </a>
+
+            </div>
+
+        `;
+
+        instruction.textContent =
+            "Clique no botão acima para realizar seu cadastro.";
+
+    });
+
+
+    /*
+     * DESABILITA MENU DO BOTÃO DIREITO
+     */
+
+    video.addEventListener("contextmenu", function (event) {
 
         event.preventDefault();
 
-    }
+    });
 
-});
 
 </script>
 
 </body>
-
 </html>
