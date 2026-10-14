@@ -209,12 +209,9 @@ video {
 
 </head>
 
-
 <body>
 
-
 <div class="container">
-
 
     <div class="header">
 
@@ -235,19 +232,14 @@ video {
             <video
                 id="video"
                 playsinline
-                preload="metadata"
+                preload="auto"
+                controls="false"
                 disablePictureInPicture
-                controlsList="nodownload noplaybackrate"
                 oncontextmenu="return false;"
             >
 
-                <!--
-                SE O NOME DO SEU VÍDEO FOR DIFERENTE,
-                ALTERE SOMENTE O NOME ABAIXO.
-                -->
-
                 <source
-                    src="video-repositor.mp4"
+                    src="https://res.cloudinary.com/uqats0ee/video/upload/v1791983597/video-repositor.mp4.mp4"
                     type="video/mp4"
                 >
 
@@ -304,7 +296,6 @@ video {
 
     </div>
 
-
 </div>
 
 
@@ -339,9 +330,7 @@ playButton.addEventListener("click", function () {
 });
 
 
-/*
-IMPEDIR AVANÇO OU RETROCESSO
-*/
+/* IMPEDIR AVANÇO OU RETROCESSO */
 
 video.addEventListener("timeupdate", function () {
 
@@ -358,9 +347,7 @@ video.addEventListener("timeupdate", function () {
 });
 
 
-/*
-IMPEDIR TENTATIVA DE ARRASTAR
-*/
+/* IMPEDIR TENTATIVA DE ARRASTAR */
 
 video.addEventListener("seeking", function () {
 
@@ -373,9 +360,7 @@ video.addEventListener("seeking", function () {
 });
 
 
-/*
-MANTER VELOCIDADE NORMAL
-*/
+/* MANTER VELOCIDADE NORMAL */
 
 video.addEventListener("ratechange", function () {
 
@@ -388,9 +373,20 @@ video.addEventListener("ratechange", function () {
 });
 
 
-/*
-QUANDO O VÍDEO TERMINAR
-*/
+/* IMPEDIR PAUSA */
+
+video.addEventListener("pause", function () {
+
+    if (!video.ended && iniciou) {
+
+        video.play();
+
+    }
+
+});
+
+
+/* QUANDO O VÍDEO TERMINAR */
 
 video.addEventListener("ended", function () {
 
@@ -402,9 +398,7 @@ video.addEventListener("ended", function () {
 });
 
 
-/*
-BLOQUEAR MENU DO BOTÃO DIREITO
-*/
+/* BLOQUEAR MENU DO BOTÃO DIREITO */
 
 video.addEventListener("contextmenu", function (event) {
 
@@ -413,9 +407,7 @@ video.addEventListener("contextmenu", function (event) {
 });
 
 
-/*
-BLOQUEAR ALGUMAS TECLAS
-*/
+/* BLOQUEAR TECLAS DE NAVEGAÇÃO */
 
 document.addEventListener("keydown", function (event) {
 
@@ -423,7 +415,9 @@ document.addEventListener("keydown", function (event) {
         "ArrowLeft",
         "ArrowRight",
         "Home",
-        "End"
+        "End",
+        " ",
+        "MediaPlayPause"
     ];
 
     if (teclasBloqueadas.includes(event.key)) {
@@ -435,7 +429,6 @@ document.addEventListener("keydown", function (event) {
 });
 
 </script>
-
 
 </body>
 
