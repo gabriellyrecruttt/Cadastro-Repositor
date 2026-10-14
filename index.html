@@ -97,7 +97,6 @@ video {
     color: #1f1f1f;
 
     font-size: 30px;
-
     cursor: pointer;
 
     display: flex;
@@ -125,39 +124,6 @@ video {
     margin-top: 5px;
 }
 
-.button-area {
-    display: flex;
-    justify-content: center;
-    margin-top: 25px;
-}
-
-#cadastroBtn {
-    display: none;
-
-    padding: 16px 48px;
-
-    border-radius: 50px;
-
-    background: #1f1f1f;
-    color: #ffffff;
-
-    text-decoration: none;
-
-    font-size: 17px;
-    font-weight: 700;
-
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-
-    transition: all 0.3s ease;
-
-    animation: aparecer 0.8s ease forwards;
-}
-
-#cadastroBtn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-}
-
 .footer {
     text-align: center;
     margin-top: 30px;
@@ -177,6 +143,34 @@ video {
         transform: scale(1);
     }
 
+}
+
+.cadastro-final {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    background: #1f1f1f;
+    color: #ffffff;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    border-radius: 18px;
+
+    animation: aparecer 0.8s ease forwards;
+
+    transition: all 0.3s ease;
+}
+
+.cadastro-final:hover {
+    background: #333333;
+    transform: scale(1.02);
 }
 
 @media (max-width: 600px) {
@@ -233,7 +227,6 @@ video {
                 id="video"
                 playsinline
                 preload="auto"
-                controls="false"
                 disablePictureInPicture
                 oncontextmenu="return false;"
             >
@@ -254,9 +247,7 @@ video {
                 type="button"
                 aria-label="Iniciar vídeo"
             >
-
                 ▶
-
             </button>
 
         </div>
@@ -268,25 +259,7 @@ video {
         class="notice"
         id="notice"
     >
-
         Clique no botão para iniciar o vídeo.
-
-    </div>
-
-
-    <div class="button-area">
-
-        <a
-            id="cadastroBtn"
-            href="https://forms.gle/A1ZPQe8f62gcNPhQ7"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-
-            Cadastre-se
-
-        </a>
-
     </div>
 
 
@@ -307,8 +280,6 @@ const videoBox = document.getElementById("videoBox");
 
 const playButton = document.getElementById("playButton");
 
-const cadastroBtn = document.getElementById("cadastroBtn");
-
 const notice = document.getElementById("notice");
 
 let ultimaPosicao = 0;
@@ -316,13 +287,13 @@ let ultimaPosicao = 0;
 let iniciou = false;
 
 
-/* INICIAR VÍDEO */
+/* INICIAR O VÍDEO */
 
 playButton.addEventListener("click", function () {
 
-    video.play();
-
     iniciou = true;
+
+    video.play();
 
     playButton.classList.add("hidden");
 
@@ -332,7 +303,7 @@ playButton.addEventListener("click", function () {
 });
 
 
-/* IMPEDIR AVANÇO OU RETROCESSO */
+/* IMPEDIR AVANÇO */
 
 video.addEventListener("timeupdate", function () {
 
@@ -349,7 +320,7 @@ video.addEventListener("timeupdate", function () {
 });
 
 
-/* IMPEDIR TENTATIVA DE ARRASTAR */
+/* IMPEDIR TENTATIVA DE AVANÇAR/RETROCEDER */
 
 video.addEventListener("seeking", function () {
 
@@ -362,7 +333,7 @@ video.addEventListener("seeking", function () {
 });
 
 
-/* MANTER VELOCIDADE NORMAL */
+/* IMPEDIR ALTERAÇÃO DE VELOCIDADE */
 
 video.addEventListener("ratechange", function () {
 
@@ -375,11 +346,11 @@ video.addEventListener("ratechange", function () {
 });
 
 
-/* IMPEDIR PAUSA */
+/* IMPEDIR PAUSA DEPOIS QUE COMEÇOU */
 
 video.addEventListener("pause", function () {
 
-    if (!video.ended && iniciou) {
+    if (iniciou && !video.ended) {
 
         video.play();
 
@@ -392,61 +363,18 @@ video.addEventListener("pause", function () {
 
 video.addEventListener("ended", function () {
 
-    /* Remove o vídeo */
+    videoBox.innerHTML = `
+    
+        <a
+            class="cadastro-final"
+            href="https://forms.gle/A1ZPQe8f62gcNPhQ7"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Cadastre-se
+        </a>
 
-    videoBox.innerHTML = "";
-
-    /* Cria o botão no mesmo espaço do vídeo */
-
-    const botao = document.createElement("a");
-
-    botao.href = "https://forms.gle/A1ZPQe8f62gcNPhQ7";
-
-    botao.target = "_blank";
-
-    botao.rel = "noopener noreferrer";
-
-    botao.textContent = "Cadastre-se";
-
-    botao.style.display = "flex";
-
-    botao.style.width = "100%";
-
-    botao.style.height = "100%";
-
-    botao.style.alignItems = "center";
-
-    botao.style.justifyContent = "center";
-
-    botao.style.textDecoration = "none";
-
-    botao.style.color = "#ffffff";
-
-    botao.style.background = "#1f1f1f";
-
-    botao.style.fontSize = "26px";
-
-    botao.style.fontWeight = "700";
-
-    botao.style.borderRadius = "18px";
-
-    botao.style.animation = "aparecer 0.8s ease forwards";
-
-    botao.style.transition = "all 0.3s ease";
-
-    botao.onmouseover = function () {
-
-        botao.style.transform = "scale(1.02)";
-
-    };
-
-    botao.onmouseout = function () {
-
-        botao.style.transform = "scale(1)";
-
-    };
-
-    videoBox.appendChild(botao);
+    `;
 
     notice.textContent =
         "Vídeo concluído! Seu cadastro está liberado.";
@@ -454,7 +382,7 @@ video.addEventListener("ended", function () {
 });
 
 
-/* BLOQUEAR MENU DO BOTÃO DIREITO */
+/* BLOQUEAR BOTÃO DIREITO */
 
 video.addEventListener("contextmenu", function (event) {
 
@@ -463,7 +391,7 @@ video.addEventListener("contextmenu", function (event) {
 });
 
 
-/* BLOQUEAR TECLAS DE NAVEGAÇÃO */
+/* BLOQUEAR TECLAS DE AVANÇO/RETROCESSO */
 
 document.addEventListener("keydown", function (event) {
 
