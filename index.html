@@ -169,12 +169,12 @@ video {
 
     0% {
         opacity: 0;
-        transform: translateY(18px) scale(0.92);
+        transform: scale(0.92);
     }
 
     100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: scale(1);
     }
 
 }
@@ -227,7 +227,7 @@ video {
 
     <div class="video-area">
 
-        <div class="video-box">
+        <div class="video-box" id="videoBox">
 
             <video
                 id="video"
@@ -278,7 +278,7 @@ video {
 
         <a
             id="cadastroBtn"
-            href="https://forms.gle/yUU5fkeRtYHFkwE6A"
+            href="https://forms.gle/A1ZPQe8f62gcNPhQ7"
             target="_blank"
             rel="noopener noreferrer"
         >
@@ -302,6 +302,8 @@ video {
 <script>
 
 const video = document.getElementById("video");
+
+const videoBox = document.getElementById("videoBox");
 
 const playButton = document.getElementById("playButton");
 
@@ -390,7 +392,61 @@ video.addEventListener("pause", function () {
 
 video.addEventListener("ended", function () {
 
-    cadastroBtn.style.display = "inline-block";
+    /* Remove o vídeo */
+
+    videoBox.innerHTML = "";
+
+    /* Cria o botão no mesmo espaço do vídeo */
+
+    const botao = document.createElement("a");
+
+    botao.href = "https://forms.gle/A1ZPQe8f62gcNPhQ7";
+
+    botao.target = "_blank";
+
+    botao.rel = "noopener noreferrer";
+
+    botao.textContent = "Cadastre-se";
+
+    botao.style.display = "flex";
+
+    botao.style.width = "100%";
+
+    botao.style.height = "100%";
+
+    botao.style.alignItems = "center";
+
+    botao.style.justifyContent = "center";
+
+    botao.style.textDecoration = "none";
+
+    botao.style.color = "#ffffff";
+
+    botao.style.background = "#1f1f1f";
+
+    botao.style.fontSize = "26px";
+
+    botao.style.fontWeight = "700";
+
+    botao.style.borderRadius = "18px";
+
+    botao.style.animation = "aparecer 0.8s ease forwards";
+
+    botao.style.transition = "all 0.3s ease";
+
+    botao.onmouseover = function () {
+
+        botao.style.transform = "scale(1.02)";
+
+    };
+
+    botao.onmouseout = function () {
+
+        botao.style.transform = "scale(1)";
+
+    };
+
+    videoBox.appendChild(botao);
 
     notice.textContent =
         "Vídeo concluído! Seu cadastro está liberado.";
