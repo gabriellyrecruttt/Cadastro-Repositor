@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cadastro | Repositor de Mercadorias</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f3f0;
+    color: #1f1f1f;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 15px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 40px 30px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.08);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #1f1f1f;
+}
+
+.header p {
+    font-size: 16px;
+    color: #666666;
+    line-height: 1.6;
+}
+
+.video-area {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto 25px;
+}
+
+.video-box {
+    position: relative;
+    width: min(100%, 430px);
+    aspect-ratio: 9 / 16;
+    background: #000000;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    background: #000000;
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 78px;
+    height: 78px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.96);
+    color: #1f1f1f;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+
+    transition: all 0.3s ease;
+}
+
+.play-button:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+}
+
+.play-button.hidden {
+    display: none;
+}
+
+.notice {
+    text-align: center;
+    font-size: 15px;
+    color: #777777;
+    line-height: 1.5;
+    margin-top: 5px;
+}
+
+.button-area {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+#cadastroBtn {
+    display: none;
+
+    padding: 16px 48px;
+
+    border-radius: 50px;
+
+    background: #1f1f1f;
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+
+    transition: all 0.3s ease;
+
+    animation: aparecer 0.8s ease forwards;
+}
+
+#cadastroBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #999999;
+    font-size: 12px;
+}
+
+@keyframes aparecer {
+
+    0% {
+        opacity: 0;
+        transform: translateY(18px) scale(0.92);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px 10px;
+    }
+
+    .container {
+        padding: 28px 18px;
+        border-radius: 18px;
+    }
+
+    .header h1 {
+        font-size: 25px;
+    }
+
+    .header p {
+        font-size: 14px;
+    }
+
+    .video-box {
+        width: min(100%, 380px);
+        border-radius: 15px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="header">
+
+        <h1>Repositor de Mercadorias</h1>
+
+        <p>
+            Assista ao vídeo completo antes de realizar seu cadastro.
+            Ao final, o botão de cadastro será liberado.
+        </p>
+
+    </div>
+
+
+    <div class="video-area">
+
+        <div class="video-box">
+
+            <video
+                id="video"
+                playsinline
+                preload="metadata"
+                disablePictureInPicture
+                controlsList="nodownload noplaybackrate"
+                oncontextmenu="return false;"
+            >
+
+                <!--
+                SE O NOME DO SEU VÍDEO FOR DIFERENTE,
+                ALTERE SOMENTE O NOME ABAIXO.
+                -->
+
+                <source
+                    src="video-repositor.mp4"
+                    type="video/mp4"
+                >
+
+                Seu navegador não suporta a reprodução deste vídeo.
+
+            </video>
+
+
+            <button
+                id="playButton"
+                class="play-button"
+                type="button"
+                aria-label="Iniciar vídeo"
+            >
+
+                ▶
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="notice"
+        id="notice"
+    >
+
+        Clique no botão para iniciar o vídeo.
+
+    </div>
+
+
+    <div class="button-area">
+
+        <a
+            id="cadastroBtn"
+            href="https://forms.gle/yUU5fkeRtYHFkwE6A"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            Cadastre-se
+
+        </a>
+
+    </div>
+
+
+    <div class="footer">
+
+        GM Promo • Recrutamento e Seleção
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+const video = document.getElementById("video");
+
+const playButton = document.getElementById("playButton");
+
+const cadastroBtn = document.getElementById("cadastroBtn");
+
+const notice = document.getElementById("notice");
+
+let ultimaPosicao = 0;
+
+let iniciou = false;
+
+
+/* INICIAR VÍDEO */
+
+playButton.addEventListener("click", function () {
+
+    video.play();
+
+    iniciou = true;
+
+    playButton.classList.add("hidden");
+
+    notice.textContent =
+        "Assista ao vídeo até o final para liberar o cadastro.";
+
+});
+
+
+/*
+IMPEDIR AVANÇO OU RETROCESSO
+*/
+
+video.addEventListener("timeupdate", function () {
+
+    if (video.currentTime > ultimaPosicao + 0.5) {
+
+        video.currentTime = ultimaPosicao;
+
+    } else {
+
+        ultimaPosicao = video.currentTime;
+
+    }
+
+});
+
+
+/*
+IMPEDIR TENTATIVA DE ARRASTAR
+*/
+
+video.addEventListener("seeking", function () {
+
+    if (video.currentTime > ultimaPosicao + 0.5) {
+
+        video.currentTime = ultimaPosicao;
+
+    }
+
+});
+
+
+/*
+MANTER VELOCIDADE NORMAL
+*/
+
+video.addEventListener("ratechange", function () {
+
+    if (video.playbackRate !== 1) {
+
+        video.playbackRate = 1;
+
+    }
+
+});
+
+
+/*
+QUANDO O VÍDEO TERMINAR
+*/
+
+video.addEventListener("ended", function () {
+
+    cadastroBtn.style.display = "inline-block";
+
+    notice.textContent =
+        "Vídeo concluído! Seu cadastro está liberado.";
+
+});
+
+
+/*
+BLOQUEAR MENU DO BOTÃO DIREITO
+*/
+
+video.addEventListener("contextmenu", function (event) {
+
+    event.preventDefault();
+
+});
+
+
+/*
+BLOQUEAR ALGUMAS TECLAS
+*/
+
+document.addEventListener("keydown", function (event) {
+
+    const teclasBloqueadas = [
+        "ArrowLeft",
+        "ArrowRight",
+        "Home",
+        "End"
+    ];
+
+    if (teclasBloqueadas.includes(event.key)) {
+
+        event.preventDefault();
+
+    }
+
+});
+
+</script>
+
+
+</body>
+
+</html>
